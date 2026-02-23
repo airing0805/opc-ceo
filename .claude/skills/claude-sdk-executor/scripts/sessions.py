@@ -50,20 +50,20 @@ def get_path_based_dirname(project_path: str) -> str:
 
 def get_sessions_dir(working_dir: str) -> Path | None:
     """获取指定项目的会话目录（支持两种命名方式）"""
-    # 方式1：MD5 hash
-    project_hash = get_project_hash(working_dir)
-    hash_dir = PROJECTS_DIR / project_hash
-    if hash_dir.exists():
-        return hash_dir
-
-    # 方式2：路径替换
+    # 优先方式2：路径替换（因为 Claude Code 实际使用这种方式）
     path_dirname = get_path_based_dirname(working_dir)
     path_dir = PROJECTS_DIR / path_dirname
     if path_dir.exists():
         return path_dir
 
-    # 都不存在，返回 hash 目录（用于创建新会话）
-    return hash_dir
+    # 方式1：MD5 hash（作为备用）
+    project_hash = get_project_hash(working_dir)
+    hash_dir = PROJECTS_DIR / project_hash
+    if hash_dir.exists():
+        return hash_dir
+
+    # 都不存在，返回路径替换目录（与 Claude Code 一致）
+    return path_dir
 
 
 def parse_session_metadata(filepath: Path) -> dict[str, Any]:
@@ -253,7 +253,11 @@ async def execute_task(
         执行结果字典
     """
     try:
-        from claude_agent_sdk import ClaudeAgentOptions, ClaudeAgentClient, ResultMessage, AssistantMessage
+        # 绕过嵌套会话检测：取消设置 CLAUDECODE 环境变量
+        import os
+        # os.environ.pop("CLAUDECODE", None)
+
+        from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, ResultMessage, AssistantMessage
     except ImportError:
         return {
             "success": False,
@@ -264,26 +268,36 @@ async def execute_task(
     options = ClaudeAgentOptions(
         permission_mode="acceptEdits",
         cwd=cwd or ".",
-        resume=session_id,
+        continue_conversation=(session_id is not None),
+        max_turns=10,  # 允足够轮次完成完整响应
+        max_budget_usd=100,  # 成本限制调整到 100
     )
 
     result_text: Optional[str] = None
-    new_session_id: Optional[str] = None
+    new_session_id: Optional[str] = session_id  # 初始为传入的 session_id，如果没有则为 None
     turns = 0
     cost_usd = 0.0
 
     try:
-        async with ClaudeAgentClient(options=options) as client:
-            await client.query(prompt)
+        # 打印开始信息
+        print_json({"status": "starting", "prompt": prompt[:100] + ("..." if len(prompt) > 100 else prompt)})
+        sys.stdout.flush()
+
+        async with ClaudeSDKClient(options=options) as client:
+            # 使用 query 方法的 session_id 参数来续传会话
+            await client.query(prompt, session_id=session_id or "default")
 
             async for message in client.receive_response():
                 if isinstance(message, AssistantMessage):
                     for block in message.content:
                         if hasattr(block, "text") and block.text:
                             result_text = (result_text or "") + block.text
+                            # 打印进度
+                            print_json({"status": "receiving", "chunk_length": len(block.text)})
+                            sys.stdout.flush()
                 elif isinstance(message, ResultMessage):
-                    if message.session_id:
-                        new_session_id = message.session_id
+                    # 获取 session_id 和其他元数据
+                    new_session_id = getattr(message, "session_id", None)
                     cost_usd = message.total_cost_usd or 0.0
                     turns = getattr(message, "turns", 0)
 
@@ -304,8 +318,16 @@ async def execute_task(
 
 
 def print_json(data: Any) -> None:
-    """打印 JSON 输出"""
-    print(json.dumps(data, ensure_ascii=False, indent=2))
+    """打印 JSON 输出（支持 Windows GBK 编码）"""
+    import sys
+    # 在 Windows 上确保正确输出 UTF-8
+    if sys.platform == "win32":
+        # 写入 stdout 的 buffer，绕过编码问题
+        output = json.dumps(data, ensure_ascii=False, indent=2)
+        sys.stdout.buffer.write(output.encode("utf-8"))
+        sys.stdout.buffer.write(b"\n")
+    else:
+        print(json.dumps(data, ensure_ascii=False, indent=2))
 
 
 def main() -> None:
@@ -329,7 +351,7 @@ def main() -> None:
     command = sys.argv[1]
 
     if command == "list":
-        cwd = "."
+        cwd = str(Path.cwd())
         i = 2
         while i < len(sys.argv):
             if sys.argv[i] == "--cwd" and i + 1 < len(sys.argv):
@@ -368,7 +390,7 @@ def main() -> None:
 
         prompt = sys.argv[2]
         session_id: Optional[str] = None
-        cwd: Optional[str] = None
+        cwd: Optional[str] = str(Path.cwd())
         tools = ["Read", "Glob", "Grep", "Bash"]
 
         # 解析选项

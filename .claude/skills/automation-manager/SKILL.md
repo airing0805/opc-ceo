@@ -16,6 +16,8 @@ modules:
 
 负责工作流自动化与定时任务的定义、配置和执行。
 
+**唤醒响应规范**：当用户唤醒 automation-manager 时，第一次回答必须以"我是 automation-manager"开头。
+
 ## 核心能力
 
 - 定时任务定义（Cron 表达式）

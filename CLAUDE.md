@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-**OPC-CEO** 是一人公司的 CEO Agent 系统，基于 Claude Code Skills/Agents 实现，不编写 Python/JavaScript 代码。
+**OPC-CEO** 是一人公司的 CEO Agent 系统，基于 Claude Code Skills/Agents 实现。
 
 ## 设计原则
 
-1. **纯 Skills 架构** - 通过 Markdown 定义技能，无需后端代码
+1. **Agent 和 Skill 优先** - 详见 [设计意图](plans/v1-技能规划/设计意图.md)
 2. **MCP Memory 作为数据层** - 所有数据存储在知识图谱中
 3. **统一入口，角色分工** - CEO 协调，各专业角色各司其职
 
