@@ -41,6 +41,7 @@
     ]
   },
   "commandAliases": {
-    "coach": "ceo-coach"
+    "coach": "ceo-coach",
+    "ceo": "opc-ceo-core"
   }
 }
