@@ -1,134 +1,283 @@
-# Claude SDK Executor
+# OPC-CEO
 
-通过 Bash 执行 Python 脚本，使用 `claude-agent-sdk` 调用 Claude Code API，实现完全独立的会话执行。
+**一人公司的 CEO Agent 系统** - 基于 Claude Code Skills/Agents 实现。
 
-## 核心价值
+## 核心理念
 
-- 解决嵌套会话导致的上下文层级过深问题
-- 提供 `session_id` 用于任务追踪和会话续传
-- 支持批量处理和自动化工作流
-- 利用 Claude Code 原生会话管理 - 会话历史自动保存到 `~/.claude/`
+### 把个人当成公司经营
 
-## 安装
+**你是一家公司的 CEO** - 这家公司的名字就是你自己。
 
-```bash
-# 克隆项目
-git clone <repository-url>
-cd OPC-CEO
+像经营上市公司一样经营你的人生和事业：
+- **财务部** - 资金流入流出、投资回报、成本控制
+- **人力资源** - 个人能力成长、技能提升、时间分配
+- **战略部** - 目标规划、路线图、优先级决策
+- **运营部** - 日常任务执行、流程优化、自动化
+- **知识部** - 经验沉淀、学习积累、复用传承
+- **行政部** - 文件管理、归档整理、资产维护
 
-# 安装依赖
-uv sync
+OPC-CEO 是这家"一人公司"的数字化运营系统。
+
+---
+
+**Agent 和 Skill 优先** - 优先通过 Claude Code 的 Agent 和 Skill 系统实现功能，而非编写独立程序。
+
+## 架构概览
+
+```
+                    ╔════════════════════════════╗
+                    ║   CEO (opc-ceo-core)       ║
+                    ║   战略决策 + 协调调度        ║
+                    ║   ───────────────────     ║
+                    ║   让每个决策都有经营意识     ║
+                    ╚════════════════════════════╝
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+  ┌─────────┐       ┌─────────┐       ┌─────────┐
+  │运营部   │       │行政部   │       │知识部   │
+  │task-   │       │file-    │       │knowledge│
+  │manager │       │manager  │       │-manager │
+  └─────────┘       └─────────┘       └─────────┘
+  任务执行            资产管理            经验沉淀
+        │                   │                   │
+        └───────────────────┼───────────────────┘
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+        ▼                   ▼                   ▼
+  ┌─────────┐       ┌─────────┐       ┌─────────┐
+  │财务部   │       │人力资源 │       │IT 基础  │
+  │finance- │       │schedule │       │automation│
+  │manager  │       │-manager │       │-manager │
+  └─────────┘       └─────────┘       └─────────┘
+  资金管理            时间管理            自动化基建
+                            │
+                            ▼
+                ╔════════════════════════════╗
+                ║   claude-sdk-executor   ║
+                ║   技术执行层              ║
+                ╚════════════════════════════╝
+
+        ╔════════════════════════════════════╗
+        ║       wellness-coach               ║
+        ║   职业心理健康支持（HR+教练）       ║
+        ║   —— 防止"CEO 倦怠"的底线保障 ——   ║
+        ╚════════════════════════════════════╝
 ```
 
-## 使用
+### 经营视角的职责分工
 
-### 列出项目会话
+| 部门 | 角色 | 经营职责 |
+|------|------|----------|
+| CEO | opc-ceo-core | 战略规划、资源配置、ROI 评估 |
+| 财务部 | finance-manager | 现金流管理、投资决策、成本分析 |
+| 人力资源 | schedule-manager | 时间ROI、能力成长规划 |
+| 运营部 | task-manager | 项目执行、交付质量、流程优化 |
+| 行政部 | file-manager | 知识资产维护、归档管理 |
+| 知识部 | knowledge-manager | 核心能力沉淀、经验复用 |
+| IT 基础 | automation-manager | 自动化基建、效率工具 |
 
-```bash
-uv run claude-executor list --cwd <path>
+## 角色体系
+
+### 一人公司组织架构
+
+| 角色 | 对应部门 | 核心职责 | 状态 |
+|------|----------|----------|------|
+| `opc-ceo-core` | CEO 办公室 | 战略决策、资源协调、ROI 分析 | ✅ |
+| `task-manager` | 运营部 | 项目交付、任务执行、质量管理 | ✅ |
+| `file-manager` | 行政部 | 资产管理、文件归档、知识组织 | ✅ |
+| `knowledge-manager` | 知识部 | 能力沉淀、经验复用、学习管理 | ✅ |
+| `finance-manager` | 财务部 | 资金管理、成本控制、投资分析 | ✅ |
+| `schedule-manager` | 人力资源部 | 时间ROI、成长规划、精力分配 | ✅ |
+| `automation-manager` | IT 基础部 | 自动化基建、工具集成、效率优化 | ✅ |
+| `claude-sdk-executor` | 技术执行层 | SDK/API 调用、外部系统集成 | ✅ |
+| `wellness-coach` | HR+教练部 | 心理健康、压力管理、工作生活平衡 | ✅ |
+
+### 外部董事与独立顾问
+
+| 角色 | 职责 | 状态 |
+|------|------|------|
+| `ceo-coach` | CEO 评估与战略指导（独立董事视角） | ✅ |
+
+### 技术基础设施
+
+| 角色 | 职责 | 状态 |
+|------|------|------|
+| `devops-engineer` | 系统运维、开发环境、技术保障 | ✅ |
+
+## 数据资产
+
+使用 **MCP Memory 知识图谱** 存储企业的核心数据资产：
+
+### 实体类型（企业资产）
+
+| 资产类型 | 对应实体 | 说明 |
+|----------|----------|------|
+| 交付成果 | 任务 (TASK) | 产出物、里程碑 |
+| 战略项目 | 项目 (PROJ) | 长期规划、战略目标 |
+| 核心能力 | 知识 (KNOWLEDGE) | 经验、方法论、最佳实践 |
+| 资金流 | 交易 (TXN) | 收入、支出、投资 |
+| 运营记录 | 事件 (EVENT) | 重要节点、变更记录 |
+| 自动化资产 | 工作流 (WORKFLOW) | 可复用的流程 |
+
+### 实体 ID 命名规范
+
+| 类型 | 格式 | 示例 |
+|------|------|------|
+| 任务 | `TASK-YYYY-MM-DD-NNN` | `TASK-2026-02-23-001` |
+| 项目 | `PROJ-NNN` | `PROJ-001` |
+| 交易 | `TXN-YYYY-MM-DD-NNN` | `TXN-2026-02-23-001` |
+| 事件 | `EVENT-YYYY-MM-DD-NNN` | `EVENT-2026-02-24-001` |
+
+## 目录结构
+
+```
+OPC-CEO/
+├── .claude/
+│   └── skills/                    # Claude Code 技能目录
+│       ├── opc-ceo-core/          # CEO 总控
+│       ├── task-manager/          # 任务管理
+│       ├── file-manager/          # 文件管理
+│       ├── knowledge-manager/     # 知识管理
+│       ├── finance-manager/       # 财务管理
+│       ├── schedule-manager/      # 日程管理
+│       ├── automation-manager/    # 自动化
+│       ├── claude-sdk-executor/   # SDK 执行器
+│       ├── wellness-coach/        # 心理健康
+│       ├── ceo-coach/             # CEO 教练
+│       └── devops-engineer/       # 运维支撑
+│
+├── docs/
+│   └── v1-技能规划/                # 规划文档
+│       ├── 设计意图.md
+│       ├── 系统架构.md
+│       ├── 总览.md
+│       ├── 模板规范.md
+│       └── 角色设计/
+│
+├── tmp/                           # 临时文档（思考古迹）
+├── CLAUDE.md                      # 项目说明（Claude Code 专用）
+└── README.md
 ```
 
-### 列出所有项目
+## 使用示例
 
-```bash
-uv run claude-executor projects
+### 经营视角的每日晨会
+
+```
+用户：「今天怎么安排」
+
+CEO Agent（相当于晨会 CEO 汇报）：
+1. 调用 task-manager → 运营部：今日交付计划
+2. 调用 schedule-manager → 人力资源：今日精力分配
+3. 调用 finance-manager → 财务部：待处理账单
+4. 调用 wellness-coach → HR：今日状态评估
+5. CEO 综合决策：按 ROI 排序的执行计划
 ```
 
-### 获取会话详情
+### 核心能力沉淀
 
-```bash
-uv run claude-executor get <session_id>
+```
+用户：「这个技术方案很关键，记录下来」
+
+CEO Agent（知识资产入库）：
+1. 调用 knowledge-manager 创建知识实体
+2. 标注应用场景、适用条件、预期收益
+3. 建立与项目、任务的关联关系
+4. 后续可复用：直接复用，而非重新发明
 ```
 
-### 删除会话
+### 定期经营分析（周/月报）
 
-```bash
-uv run claude-executor delete <session_id>
+```
+用户：「生成本周经营分析」
+
+automation-manager：
+1. 定义周期性工作流（每周五自动执行）
+2. 数据汇总：
+   - task-manager → 运营效率：完成率、延期率
+   - finance-manager → 财务状况：收入、支出、ROI
+   - schedule-manager → 人力投入：时间分配、能力成长
+3. 生成经营报告：供战略复盘使用
 ```
 
-### 执行任务（新建会话）
+### 投资决策支持
 
-```bash
-uv run claude-executor exec "<prompt>" --cwd <path>
+```
+用户：「这个学习资源值不值得投入？」
+
+CEO Agent（投资决策）：
+1. finance-manager：预算评估
+2. schedule-manager：时间成本估算
+3. knowledge-manager：收益预测（可复用性）
+4. CEO 决策：是否批准这项"投资"
 ```
 
-### 续传会话（多轮对话）
+## 相关文档
 
-```bash
-uv run claude-executor exec "<prompt>" --resume <session_id> --cwd <path>
-```
-
-## 命令参数
-
-| 参数 | 说明 |
+| 文档 | 用途 |
 |------|------|
-| `--cwd <path>` | 工作目录 |
-| `--resume <session_id>` | 恢复指定会话 |
-| `--tools <tool1,tool2>` | 允许的工具列表（默认：Read,Glob,Grep,Bash） |
-
-## 输出格式
-
-### 成功响应
-
-```json
-{
-  "success": true,
-  "session_id": "abc123-def456",
-  "result": "执行结果内容",
-  "turns": 3,
-  "cost_usd": 0.0125
-}
-```
-
-### 错误响应
-
-```json
-{
-  "success": false,
-  "error": "错误类型",
-  "session_id": null
-}
-```
-
-## 会话存储
-
-会话自动保存到：
-```
-~/.claude/projects/<project_hash>/<session_id>.jsonl
-```
-
-- `project_hash`：项目路径的路径替换格式
-- `session_id`：Claude Code 生成的会话标识
-- `.jsonl`：JSON Lines 格式，每行一条消息
-
-## 开发
-
-### 运行测试
-
-```bash
-uv run pytest
-```
-
-### 测试覆盖率
-
-```bash
-uv run pytest --cov=src/claude_sdk_executor --cov-report=html
-```
-
-## 项目结构
-
-```
-src/claude_sdk_executor/
-├── __init__.py       # 包初始化
-├── sessions.py        # 会话管理核心逻辑
-├── cli.py            # CLI 入口
-└── exceptions.py      # 自定义异常
-
-tests/
-├── __init__.py
-└── test_sessions.py   # 单元测试
-```
+| [设计意图](docs/v1-技能规划/设计意图.md) | 设计原则、技术决策依据 |
+| [系统架构](docs/v1-技能规划/系统架构.md) | 架构设计、角色体系、数据模型 |
+| [总览](docs/v1-技能规划/总览.md) | 版本规划与执行顺序 |
+| [模板规范](docs/v1-技能规划/模板规范.md) | Skill 格式、实体定义 |
 
 ## 许可证
 
 MIT
+
+---
+
+## 公司运营状态
+
+**报告日期**：2026-02-24
+
+### 技能完成度
+
+| 角色 | 状态 | 完成度 |
+|------|------|--------|
+| opc-ceo-core | ✅ | 100% |
+| task-manager | ✅ | 100% |
+| file-manager | ✅ | 100% |
+| knowledge-manager | ✅ | 100% |
+| finance-manager | ✅ | 100% |
+| schedule-manager | ✅ | 100% |
+| automation-manager | ✅ | 100% |
+| claude-sdk-executor | ✅ | 100% |
+| wellness-coach | ✅ | 100% |
+| ceo-coach | ✅ | 100% |
+| devops-engineer | ✅ | 100% |
+
+### 项目进展
+
+| 版本 | 任务 | 进度 |
+|------|------|------|
+| V1.0 核心技能 | 4/4 | 100% ✅ |
+| V2.0 Agent 协作系统 | 13/13 | 100% ✅ |
+
+**核心成就**：成功从 SDK 嵌套方案转向原生 Task/Team 协作架构
+
+### CEO 表现评估
+
+**当前阶段**：基础期验证（第 1-2 周）
+
+| 要求 | 状态 |
+|------|------|
+| 理解所有 8 个下属角色的职责 | ⚠️ 待验证 |
+| 能够正确分发任务到对应角色 | ⚠️ 待验证 |
+| 建立基本的上下文管理习惯 | ⚠️ 待验证 |
+| 完成首次决策记录 | ❌ 未完成 |
+
+### 下一步行动
+
+| 优先级 | 行动 | 截止时间 |
+|--------|------|----------|
+| P0 | CEO 回答能力边界测试题 | 本周 |
+| P0 | Coach 评估 CEO 回答 | 本周 |
+| P1 | CEO 记录首次决策到 MCP Memory | 本周 |
+
+---
+
+**更新时间**：2026-02-24
