@@ -137,25 +137,29 @@ OPC-CEO 是这家"一人公司"的数字化运营系统。
 OPC-CEO/
 ├── .claude/
 │   └── skills/                    # Claude Code 技能目录
-│       ├── opc-ceo-core/          # CEO 总控
-│       ├── task-manager/          # 任务管理
-│       ├── file-manager/          # 文件管理
-│       ├── knowledge-manager/     # 知识管理
-│       ├── finance-manager/       # 财务管理
-│       ├── schedule-manager/      # 日程管理
-│       ├── automation-manager/    # 自动化
-│       ├── claude-sdk-executor/   # SDK 执行器
-│       ├── wellness-coach/        # 心理健康
 │       ├── ceo-coach/             # CEO 教练
-│       └── devops-engineer/       # 运维支撑
+│       ├── claude-sdk-executor/   # SDK 执行器
+│       └── disabled/              # 已废弃的 V1 Skills（保留参考）
+│           ├── opc-ceo-core/
+│           ├── task-manager/
+│           ├── file-manager/
+│           ├── knowledge-manager/
+│           ├── finance-manager/
+│           ├── schedule-manager/
+│           ├── automation-manager/
+│           └── wellness-coach/
 │
 ├── docs/
-│   └── v1-技能规划/                # 规划文档
-│       ├── 设计意图.md
-│       ├── 系统架构.md
-│       ├── 总览.md
-│       ├── 模板规范.md
-│       └── 角色设计/
+│   ├── 归档/                       # 归档文档
+│   │   └── 运营规划/
+│   │       └── 本周计划/
+│   ├── 战略规划/                   # 战略目标、公司愿景
+│   ├── 技术规划/                   # 技术架构规划
+│   ├── 沟通文档/                   # 沟通规范、任务分配、工作日志
+│   ├── 版本规划/
+│   │   ├── v1-技能规划/           # V1 版本规划（已废弃）
+│   │   └── v2-技能规划/           # V2 Agent 协作系统（当前版本）
+│   └── 运营规划/                   # 运营指标、月度计划
 │
 ├── tmp/                           # 临时文档（思考古迹）
 ├── CLAUDE.md                      # 项目说明（Claude Code 专用）
@@ -219,10 +223,19 @@ CEO Agent（投资决策）：
 
 | 文档 | 用途 |
 |------|------|
-| [设计意图](docs/v1-技能规划/设计意图.md) | 设计原则、技术决策依据 |
-| [系统架构](docs/v1-技能规划/系统架构.md) | 架构设计、角色体系、数据模型 |
-| [总览](docs/v1-技能规划/总览.md) | 版本规划与执行顺序 |
-| [模板规范](docs/v1-技能规划/模板规范.md) | Skill 格式、实体定义 |
+| [V2 规划总览](docs/版本规划/v2-技能规划/README.md) | V2 Agent 协作系统规划（当前版本） |
+| [Team 协作架构](docs/版本规划/v2-技能规划/Team协作架构.md) | Team API 协作架构设计 |
+| [SendMessage 协作](docs/版本规划/v2-技能规划/SendMessage协作.md) | SendMessage API 协作模式 |
+| [文档沟通规范](docs/沟通文档/文档沟通规范.md) | 沟通文档规范和模板 |
+| [规划体系](docs/规划体系.md) | 规划体系总入口 |
+
+### 历史归档（V1 版本）
+
+| 文档 | 用途 |
+|------|------|
+| [设计意图](docs/版本规划/v1-技能规划/设计意图.md) | V1 版本设计原则（已废弃） |
+| [系统架构](docs/版本规划/v1-技能规划/系统架构.md) | V1 版本架构设计（已废弃） |
+| [总览](docs/版本规划/v1-技能规划/总览.md) | V1 版本规划（已废弃） |
 
 ## 许可证
 

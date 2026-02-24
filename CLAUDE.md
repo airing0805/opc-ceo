@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 设计原则
 
-1. **Agent 和 Skill 优先** - 详见 [设计意图](docs/版本规划/v1-技能规划/设计意图.md)
+1. **Agent 和 Skill 优先** - 详见 [V2 协作架构](docs/版本规划/v2-技能规划/Team协作架构.md)
 2. **MCP Memory 作为数据层** - 所有数据存储在知识图谱中
 3. **统一入口，角色分工** - CEO 协调，各专业角色各司其职
 
@@ -62,23 +62,47 @@ finance-manager  schedule-manager  automation-manager
 
 ## 实现状态
 
-- ✅ `devops-engineer` - 运维支撑
-- 📋 关键路径：`opc-ceo-core`, `task-manager`, `file-manager`, `claude-sdk-executor`
-- 📋 后续：`knowledge-manager`, `finance-manager`, `schedule-manager`, `automation-manager`
+### V1 Skills（已废弃并归档）
+
+所有 V1 Skills 已移动到 `.claude/skills/disabled/` 目录，保留参考用途：
+- `opc-ceo-core` - CEO 总控
+- `task-manager` - 任务管理
+- `file-manager` - 文件管理
+- `knowledge-manager` - 知识管理
+- `finance-manager` - 财务管理
+- `schedule-manager` - 日程管理
+- `automation-manager` - 自动化
+- `wellness-coach` - 心理健康
+
+### V2 Agents（当前版本）
+
+使用原生 Team/SendMessage API 实现：
+- ✅ `ceo-coach` - CEO 教练
+- ✅ `claude-sdk-executor` - SDK 执行器
+- 📋 后续：基于 V2 协作架构实现各专业角色
 
 ## 关键文档
+
+### 当前版本（V2）
 
 | 文档 | 用途 |
 |------|------|
 | [规划体系.md](docs/规划体系.md) | 规划体系总入口 |
-| [设计意图.md](docs/版本规划/v1-技能规划/设计意图.md) | 设计原则、技术决策依据、验收标准 |
-| [模板规范.md](docs/版本规划/v1-技能规划/模板规范.md) | Skill 格式、实体定义、命名规范 |
-| [角色设计](docs/版本规划/v1-技能规划/角色设计/) | 8 个技能的详细设计 |
-| [总览.md](docs/版本规划/v1-技能规划/总览.md) | V1 版本规划与执行顺序 |
-| [任务清单.md](docs/版本规划/v1-技能规划/任务清单.md) | 实现任务清单 |
 | [README.md](docs/版本规划/v2-技能规划/README.md) | V2 Agent 协作系统规划 |
+| [Team协作架构.md](docs/版本规划/v2-技能规划/Team协作架构.md) | Team API 协作架构设计 |
+| [SendMessage协作.md](docs/版本规划/v2-技能规划/SendMessage协作.md) | SendMessage API 协作模式 |
+| [文档沟通规范.md](docs/沟通文档/文档沟通规范.md) | 沟通文档规范和模板 |
 | [公司愿景.md](docs/战略规划/公司愿景.md) | 长期愿景和使命 |
 | [战略目标.md](docs/战略规划/战略目标.md) | 年度/季度战略目标 |
-| [文档沟通规范.md](docs/沟通文档/文档沟通规范.md) | 沟通文档规范和模板 |
+
+### 历史归档（V1）
+
+| 文档 | 用途 |
+|------|------|
+| [设计意图.md](docs/版本规划/v1-技能规划/设计意图.md) | V1 版本设计原则、技术决策依据 |
+| [模板规范.md](docs/版本规划/v1-技能规划/模板规范.md) | V1 Skill 格式、实体定义、命名规范 |
+| [角色设计](docs/版本规划/v1-技能规划/角色设计/) | 8 个技能的详细设计 |
+| [总览.md](docs/版本规划/v1-技能规划/总览.md) | V1 版本规划与执行顺序 |
+| [任务清单.md](docs/版本规划/v1-技能规划/任务清单.md) | V1 实现任务清单 |
 
 

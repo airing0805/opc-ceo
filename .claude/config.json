@@ -1,0 +1,39 @@
+{
+  "project": {
+    "name": "OPC-CEO",
+    "description": "一人公司的 CEO Agent 系统，基于 Claude Code Skills/Agents 实现"
+  },
+  "paths": {
+    "gitRepositoryDir": "E:/repository_git",
+    "tempDir": "tmp/",
+    "docsDir": "docs",
+    "skillsDir": ".claude/skills",
+    "agentsDir": ".claude/agents"
+  },
+  "naming": {
+    "useChineseNames": true
+  },
+  "entityId": {
+    "task": {
+      "format": "TASK-YYYY-MM-DD-NNN",
+      "example": "TASK-2026-02-23-001"
+    },
+    "project": {
+      "format": "PROJ-NNN",
+      "example": "PROJ-001"
+    },
+    "transaction": {
+      "format": "TXN-YYYY-MM-DD-NNN",
+      "example": "TXN-2026-02-23-001"
+    },
+    "event": {
+      "format": "EVENT-YYYY-MM-DD-NNN",
+      "example": "EVENT-2026-02-24-001"
+    }
+  },
+  "skills": {
+    "entryFileName": "SKILL.md",
+    "quickRefFileName": "快速参考.md",
+    "useChineseModuleNames": true
+  }
+}
