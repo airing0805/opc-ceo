@@ -24,6 +24,12 @@ Thumbs.db
 tmp/
 *.tmp
 
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+.pytest_cache
+
 # Secrets
 .env
 .env.*
