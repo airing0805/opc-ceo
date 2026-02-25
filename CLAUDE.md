@@ -12,11 +12,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **MCP Memory 作为数据层** - 所有数据存储在知识图谱中
 3. **统一入口，角色分工** - CEO 协调，各专业角色各司其职
 4. **无角色时忘状态** - 没有唤醒角色时，忘掉当前项目的状态，不进行任何假设或操作
+5. **Coach 制定规范，CEO 执行** - **所有规范由 coach 制定，CEO 负责执行规划内容**
+6. **只做规划，不直接执行** - 与用户会话时只做规划（分析、方案、建议），**所有需要执行的事情必须记录到任务分配**，由 CEO 调度执行
 
 ## 核心架构
 
 ```
-            CEO (opc-ceo-core) - 决策协调
+            Coach (ceo-coach) - 制定规范、规划内容
+                    │
+                    ▼
+            CEO (opc-ceo-core) - 执行规划、协调执行
                     │
     ┌───────────────┼───────────────┐
     │               │               │
@@ -31,6 +36,8 @@ finance-manager  schedule-manager  automation-manager
                             ▼
                 claude-sdk-executor (程序化执行)
 ```
+
+> **核心原则**：Coach（ceo-coach）负责制定所有规范和规划，CEO（opc-ceo-core）负责执行规划内容并协调各角色完成任务。
 
 ## 实体 ID 命名规范
 
@@ -78,6 +85,19 @@ finance-manager  schedule-manager  automation-manager
   - 保持文档单一职责
   - 新文档需有清晰的职责边界
 
+### 目录文件数量触发规范
+
+- **触发阈值**：当单个目录下的文件（.md）超过 **20 个**时
+- **触发流程**：
+  1. **由 coach 制定规范** - coach 分析当前目录结构，制定重新规范方案
+  2. **CEO 执行规范** - CEO 按照 coach 制定的方案执行文档重组
+- **执行原则**：
+  - Coach 负责分析问题、设计规范、制定拆分/整合方案
+  - CEO 负责执行具体的文档操作（拆分、合并、创建索引等）
+  - 执行完成后需向 coach 汇报结果
+
+> **示例**：docs/ 目录下已有 82 个 .md 文件，触发重新规范，需由 coach 制定方案后 CEO 执行。
+
 ## Skill 创建规范
 
 创建 Skill 时必须遵循以下命名规则：
@@ -124,6 +144,7 @@ finance-manager  schedule-manager  automation-manager
 | [文档沟通规范.md](docs/沟通文档/文档沟通规范.md) | 沟通文档规范和模板 |
 | [公司愿景.md](docs/战略规划/公司愿景.md) | 长期愿景和使命 |
 | [战略目标.md](docs/战略规划/战略目标.md) | 年度/季度战略目标 |
+| [内容生产规范.md](docs/内容生产规范.md) | 内容生产流程与角色分工 |
 
 ### 历史归档（V1）
 
