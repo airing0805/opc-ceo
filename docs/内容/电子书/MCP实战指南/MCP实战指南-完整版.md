@@ -149,7 +149,7 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 ### MCP 如何解决这些问题
 
 | 问题 | MCP 的解决方案 |
-|------|---------------|
+| ---- | -------------- |
 | 定制开发 | 统一协议，一次开发，处处可用 |
 | 安全问题 | 内置权限模型，支持范围限制 |
 | 选择困境 | 开放标准，所有 AI 平台都能用 |
@@ -168,7 +168,7 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 ### 官方服务器
 
 | 服务器 | 功能 |
-|--------|------|
+| ------ | ---- |
 | `server-filesystem` | 文件系统操作 |
 | `server-github` | GitHub 仓库管理 |
 | `server-postgres` | PostgreSQL 数据库 |
@@ -228,7 +228,7 @@ npm --version
 ### 2.1.2 找到配置文件位置
 
 | 操作系统 | 配置文件路径 |
-|---------|-------------|
+| -------- | ---------------------------------------- |
 | **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` |
 | **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
 | **Linux** | `~/.config/Claude/claude_desktop_config.json` |
@@ -324,7 +324,7 @@ claude --version
 ## 2.5 常见问题排查
 
 | 错误现象 | 可能原因 | 解决方法 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | "command not found" | 系统找不到 npx | 检查 Node.js 安装 |
 | 服务器连接超时 | 网络问题 | 检查网络连接 |
 | 权限被拒绝 | 文件系统权限不足 | 检查路径权限 |
@@ -386,7 +386,7 @@ Claude：[调用 list_directory 工具]
 ### 效果展示
 
 | 传统方式 | MCP 方式 |
-|---------|---------|
+| -------- | -------- |
 | 手动浏览文件 | 直接问"有哪些文件" |
 | 用 grep 搜索 | 直接问"搜索 xxx" |
 
@@ -495,7 +495,7 @@ Claude：
 本章通过 4 个实战案例，我们学习了：
 
 | 案例 | MCP 服务器 | 核心能力 |
-|------|-----------|---------|
+| ---- | ---------- | -------- |
 | 文件管理 | filesystem | 读写、搜索本地文件 |
 | 代码管理 | github | 仓库操作、Issue/PR |
 | 消息通知 | slack | 发送/读取消息 |
@@ -514,7 +514,7 @@ Claude：
 ### 选择开发语言
 
 | 语言 | SDK 包 | 适用场景 |
-|------|--------|----------|
+| ---- | ------ | -------- |
 | TypeScript | `@modelcontextprotocol/sdk` | 前端/全栈开发者 |
 | Python | `mcp` | 数据科学/AI 开发者 |
 
@@ -602,7 +602,7 @@ npx @modelcontextprotocol/inspector node your-server.js
 ### 常见错误排查
 
 | 错误现象 | 可能原因 | 解决方法 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | 启动后立即退出 | 未连接传输层 | 检查 server.connect() |
 | 工具调用无响应 | 异步未返回 | 确保返回 Promise |
 
@@ -625,7 +625,7 @@ npx @modelcontextprotocol/inspector node your-server.js
 ### 官方资源
 
 | 资源 | 链接 |
-|------|------|
+| ---- | ---- |
 | MCP 官方文档 | [modelcontextprotocol.io](https://modelcontextprotocol.io/) |
 | MCP GitHub | [github.com/modelcontextprotocol](https://github.com/modelcontextprotocol) |
 
