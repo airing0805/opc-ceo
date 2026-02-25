@@ -66,4 +66,4 @@
 
 ## 教练角色
 
-参见：[教练-task-manager](./教练-02-task-manager.md)
+**说明**：V1 架构演进中，CEO 内置了教练能力，承担了所有下属角色的教练职责。task-manager 的教练功能由 CEO 直接提供。

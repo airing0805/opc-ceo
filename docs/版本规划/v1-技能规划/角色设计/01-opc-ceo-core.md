@@ -476,18 +476,7 @@
 
 ### 教练调度
 
-CEO 根据触发条件，调用对应教练角色：
-
-| 角色 | 对应教练 |
-|------|----------|
-| task-manager | 教练-task-manager |
-| file-manager | 教练-file-manager |
-| knowledge-manager | 教练-knowledge-manager |
-| finance-manager | 教练-finance-manager |
-| schedule-manager | 教练-schedule-manager |
-| automation-manager | 教练-automation-manager |
-| claude-sdk-executor | 教练-claude-sdk-executor |
-| wellness-coach | 教练-wellness-coach |
+**说明**：V1 架构演进过程中，CEO 内置了教练能力，承担了所有下属角色的教练职责。原有的独立教练角色文档未实际创建。CEO 直接提供教练服务。
 
 ### 自我成长触发示例
 
@@ -497,8 +486,8 @@ CEO 根据触发条件，调用对应教练角色：
 CEO 分析:
 1. 检查 task-manager 近期执行记录
 2. 识别具体问题点
-3. 调用 教练-task-manager 进行优化
-4. 教练更新 task-manager 能力
+3. CEO 直接进行分析和优化建议
+4. 更新 task-manager 能力设计
 5. 验证改进效果
 ```
 

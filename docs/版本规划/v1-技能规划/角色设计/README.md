@@ -19,31 +19,16 @@
 ├── README.md                      # 本索引文件
 │
 ├── 01-opc-ceo-core.md            # CEO 核心控制
-├── 教练-01-opc-ceo-core.md       # 教练 - CEO 核心控制
-│
 ├── 02-task-manager.md            # 任务管理专家
-├── 教练-02-task-manager.md       # 教练 - 任务管理
-│
 ├── 03-file-manager.md            # 文件管理专家
-├── 教练-03-file-manager.md       # 教练 - 文件管理
-│
 ├── 04-knowledge-manager.md       # 知识管理专家
-├── 教练-04-knowledge-manager.md  # 教练 - 知识管理
-│
 ├── 05-finance-manager.md         # 财务管理专家
-├── 教练-05-finance-manager.md    # 教练 - 财务管理
-│
 ├── 06-schedule-manager.md        # 日程管理专家
-├── 教练-06-schedule-manager.md   # 教练 - 日程管理
-│
 ├── 07-automation-manager.md      # 自动化专家
-├── 教练-07-automation-manager.md # 教练 - 自动化
-│
 ├── 08-claude-sdk-executor.md     # Claude SDK 执行器
-├── 教练-08-claude-sdk-executor.md# 教练 - SDK 执行器
-│
 ├── 09-wellness-coach.md          # 心理咨询师
-└── 教练-09-wellness-coach.md     # 教练 - 心理咨询
+│
+└── ceo-coach.md                  # CEO 外部评估教练
 ```
 
 ## 角色分类
@@ -80,19 +65,21 @@
 - **行为优化**：分析执行效果，提出改进建议
 - **能力扩展**：评估新功能，设计扩展路径
 
-### 教练角色列表
+### 教练角色
 
-| 教练角色 | 对应执行角色 |
-|----------|--------------|
-| [ceo-coach](../../.claude/skills/ceo-coach/SKILL.md) | opc-ceo-core |
-| [教练-02-task-manager](./教练-02-task-manager.md) | task-manager |
-| [教练-03-file-manager](./教练-03-file-manager.md) | file-manager |
-| [教练-04-knowledge-manager](./教练-04-knowledge-manager.md) | knowledge-manager |
-| [教练-05-finance-manager](./教练-05-finance-manager.md) | finance-manager |
-| [教练-06-schedule-manager](./教练-06-schedule-manager.md) | schedule-manager |
-| [教练-07-automation-manager](./教练-07-automation-manager.md) | automation-manager |
-| [教练-08-claude-sdk-executor](./教练-08-claude-sdk-executor.md) | claude-sdk-executor |
-| [教练-09-wellness-coach](./教练-09-wellness-coach.md) | wellness-coach |
+**说明**：V1 架构演进过程中，CEO 内置了教练能力，承担了下属角色的教练职责。原有的独立教练角色文档未实际创建。仅保留 `ceo-coach` 作为 CEO 的外部评估教练。
+
+| 教练角色 | 对应执行角色 | 状态 |
+|----------|--------------|------|
+| [ceo-coach](./ceo-coach.md) | opc-ceo-core | 已创建 |
+| 教练-task-manager | task-manager | 未创建（由 CEO 承担） |
+| 教练-file-manager | file-manager | 未创建（由 CEO 承担） |
+| 教练-knowledge-manager | knowledge-manager | 未创建（由 CEO 承担） |
+| 教练-finance-manager | finance-manager | 未创建（由 CEO 承担） |
+| 教练-schedule-manager | schedule-manager | 未创建（由 CEO 承担） |
+| 教练-automation-manager | automation-manager | 未创建（由 CEO 承担） |
+| 教练-claude-sdk-executor | claude-sdk-executor | 未创建（由 CEO 承担） |
+| 教练-wellness-coach | wellness-coach | 未创建（由 CEO 承担） |
 
 ## 角色架构图
 
@@ -139,17 +126,6 @@
 2. **能力要求**：该角色需要具备的能力
 3. **技能文件**：对应的技能文件列表
 4. **核心职责/功能**：详细的功能说明
-5. **教练角色**：指向对应教练文档的链接
-
-### 教练文档结构
-
-每个教练文档应包含：
-
-1. **教练角色定位**：教练的职责范围
-2. **教练职责**：具体指导领域
-3. **指导领域**：关注的优化方向
-4. **评估指标**：衡量效果的指标
-5. **指导原则**：教练应遵循的原则
 
 ## 更新历史
 

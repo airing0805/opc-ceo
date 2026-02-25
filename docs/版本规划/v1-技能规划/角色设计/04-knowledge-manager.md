@@ -59,4 +59,4 @@ Concept ──relates_to──► Concept
 
 ## 教练角色
 
-参见：[教练-knowledge-manager](./教练-04-knowledge-manager.md)
+**说明**：V1 架构演进中，CEO 内置了教练能力，承担了所有下属角色的教练职责。knowledge-manager 的教练功能由 CEO 直接提供。

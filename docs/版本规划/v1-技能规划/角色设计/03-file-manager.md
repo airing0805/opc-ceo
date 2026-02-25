@@ -48,4 +48,4 @@
 
 ## 教练角色
 
-参见：[教练-file-manager](./教练-03-file-manager.md)
+**说明**：V1 架构演进中，CEO 内置了教练能力，承担了所有下属角色的教练职责。file-manager 的教练功能由 CEO 直接提供。
