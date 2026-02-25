@@ -1,5 +1,15 @@
 # 知识管理专家 (knowledge-manager)
 
+> **注意**：此文档属于 V1 版本规划，已于 2026-02-24 废弃。
+>
+> V1 基于纯 Skills 架构，V2 已转向原生 Team/SendMessage API 协作架构。
+>
+> 当前版本请参考：[V2 规划总览](../../v2-技能规划/README.md)
+>
+> 原有 Skills 已归档至：`.claude/skills/disabled/`
+
+---
+
 ## 角色定位
 
 个人知识库的构建与维护

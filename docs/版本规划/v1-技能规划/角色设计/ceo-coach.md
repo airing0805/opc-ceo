@@ -1,6 +1,18 @@
 # ceo-coach - CEO 教练
 
-> **Skill正式名称**: `ceo-coach`  
+> **注意**：此文档属于 V1 版本规划，已于 2026-02-24 废弃。
+>
+> V1 基于纯 Skills 架构，V2 已转向原生 Team/SendMessage API 协作架构。
+>
+> 当前版本请参考：[V2 规划总览](../../v2-技能规划/README.md)
+>
+> 原有 Skills 已归档至：`.claude/skills/disabled/`
+>
+> **注意**：ceo-coach 在 V2 中已演变为 `ceo-coach-planning`，专注于规划教练职能。
+
+---
+
+> **Skill正式名称**: `ceo-coach`
 > **唤醒名称**: `coach`
 
 ## coach背景
