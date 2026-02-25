@@ -4,10 +4,10 @@
 
 ---
 
-**作者**：一人公司CEO  
+**作者**：一人公司 CEO  
 **版本**：v1.0  
-**定价**：9.9元  
-**发布日期**：2026年3月
+**定价**：9.9 元  
+**发布日期**：2026 年 3 月
 
 ---
 
@@ -28,7 +28,7 @@ MCP（Model Context Protocol）是 Anthropic 在 2024 年底推出的开放标�
 
 - 理解 MCP 的核心概念和工作原理
 - 安装和配置 Claude Desktop 与 Claude Code
-- 使用常见的 MCP 服务器（文件系统、GitHub、Slack等）
+- 使用常见的 MCP 服务器（文件系统、GitHub、Slack 等）
 - 开发自己的 MCP 服务器
 - 应用安全最佳实践和性能优化技巧
 
@@ -49,6 +49,7 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 在 2024 �
 简单来说，MCP 就像是 AI 助手的"万能转接头"。
 
 想象一下这个场景：你正在使用 Claude 帮你工作，你希望它能：
+
 - 读取你本地电脑上的文件
 - 查询你公司数据库里的数据
 - 调用你常用的 API 服务
@@ -65,6 +66,7 @@ MCP 的出现改变了这一切。它提供了一套统一的标准，让任何 
 > 一个开放标准，使开发者能够在其数据源和 AI 驱动的工具之间建立安全的双向连接。
 
 这个定义中有几个关键词值得注意：
+
 - **开放标准**：任何人都可以使用和扩展
 - **安全**：内置权限控制和数据保护
 - **双向连接**：既能读取数据，也能执行操作
@@ -80,6 +82,7 @@ MCP 的出现改变了这一切。它提供了一套统一的标准，让任何 
 MCP 服务器是提供功能的"服务端"。它暴露特定的能力，等待客户端来调用。
 
 可以把 MCP 服务器理解为一个"能力提供者"。比如：
+
 - **文件系统服务器**：提供读写文件的能力
 - **数据库服务器**：提供查询数据库的能力
 - **GitHub 服务器**：提供操作 GitHub 仓库的能力
@@ -95,12 +98,14 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 ### 1.2.3 工具（Tool）
 
 工具是服务器暴露的可执行功能。每个工具都有：
+
 - **名称**：唯一标识符
 - **描述**：说明工具的用途
 - **输入参数**：定义工具需要什么参数
 - **输出结果**：执行后返回的数据
 
 例如，一个文件系统服务器可能提供以下工具：
+
 - `read_file`：读取文件内容
 - `write_file`：写入文件内容
 - `list_directory`：列出目录内容
@@ -111,6 +116,7 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 资源是服务器暴露的可读数据。与工具不同，资源是"静态"的数据端点，类似于文件或 API 端点。
 
 资源通过 URI（统一资源标识符）来标识，例如：
+
 - `file:///path/to/document.txt`
 - `github://repo/issue/123`
 
@@ -120,7 +126,7 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 
 ### 概念关系图
 
-```
+```text
 ┌─────────────────────────────────────────────────────────┐
 │                    MCP 客户端（AI 应用）                   │
 │   例如：Claude Desktop、Cursor、Windsurf                  │
@@ -149,6 +155,7 @@ MCP 客户端是使用功能的"消费端"。它连接到服务器，调用服�
 | 选择困境 | 开放标准，所有 AI 平台都能用 |
 
 **MCP 的核心价值**：
+
 1. **标准化**：用同一套协议连接所有数据源
 2. **可复用**：一次开发的服务器可以被多个客户端使用
 3. **安全性**：内置权限控制和数据保护机制
@@ -196,6 +203,7 @@ npm --version
 ## 1.6 本章小结
 
 本章我们学习了：
+
 1. **MCP 是什么**：一种让 AI 助手连接外部数据源和工具的开放标准
 2. **核心概念**：服务器、客户端、工具、资源、提示词
 3. **MCP 与 Claude**：Claude Desktop 和 Claude Code 都支持 MCP
@@ -326,6 +334,7 @@ claude --version
 ## 2.6 本章小结
 
 本章我们完成了：
+
 1. **Claude Desktop 安装**：下载、安装、配置 MCP
 2. **Claude Code 安装**：npm 安装、授权登录
 3. **配置文件详解**：字段说明、启动方式
@@ -364,8 +373,9 @@ claude --version
 
 ### 实际使用示例
 
-```
+```text
 用户：请列出我的 ai-workspace 文件夹里有什么文件。
+
 Claude：[调用 list_directory 工具]
 你的 ai-workspace 文件夹目前包含：
 - 项目笔记.md
@@ -378,7 +388,7 @@ Claude：[调用 list_directory 工具]
 | 传统方式 | MCP 方式 |
 |---------|---------|
 | 手动浏览文件 | 直接问"有哪些文件" |
-| 用 grep 搜索 | 直接问"搜索xxx" |
+| 用 grep 搜索 | 直接问"搜索 xxx" |
 
 **效率提升**：3-5 倍
 
@@ -408,8 +418,9 @@ Claude：[调用 list_directory 工具]
 
 ### 实际使用示例
 
-```
+```text
 用户：帮我搜索一下与 "MCP server" 相关的热门仓库。
+
 Claude：[调用 search_repositories 工具]
 找到了以下热门仓库：
 1. modelcontextprotocol/servers (⭐ 2.3k)
@@ -464,8 +475,9 @@ Claude：[调用 search_repositories 工具]
 
 ### 工作流示例
 
-```
+```text
 用户：创建一篇文章，上传到 GitHub，发送 Slack 通知。
+
 Claude：
 1. [write_file] 创建文章 ✅
 2. [create_or_update_file] 上传 GitHub ✅
@@ -539,6 +551,7 @@ await server.connect(transport);
 
 ```typescript
 const ALLOWED_DIR = "/Users/username/safe-folder";
+
 // 校验路径是否在允许范围内
 if (!resolvedPath.startsWith(ALLOWED_DIR)) {
   throw new Error("无权访问此路径");
@@ -559,7 +572,9 @@ const apiKey = process.env.MY_API_KEY;
 ### 批量操作
 
 ```typescript
-server.tool("read-files", "批量读取", 
+server.tool(
+  "read-files",
+  "批量读取",
   { paths: z.array(z.string()).max(50) },
   async ({ paths }) => {
     const contents = await Promise.all(
@@ -626,6 +641,7 @@ npx @modelcontextprotocol/inspector node your-server.js
 ## 4.7 本章小结
 
 本章我们学习了：
+
 1. **开发服务器**：使用 TypeScript/Python SDK
 2. **安全实践**：最小权限、敏感信息保护
 3. **性能优化**：批量操作、分页、缓存
@@ -643,6 +659,7 @@ npx @modelcontextprotocol/inspector node your-server.js
 ---
 
 > **下一步建议**：
+>
 > 1. 选择一个你日常工作中重复性高的任务
 > 2. 思考是否可以用 MCP 自动化
 > 3. 开发一个小型 MCP 服务器
@@ -654,4 +671,4 @@ npx @modelcontextprotocol/inspector node your-server.js
 
 *本书约 17,400 字，共 4 章*
 
-*最后更新：2026年2月*
+*最后更新：2026 年 2 月*
