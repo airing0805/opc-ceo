@@ -3,12 +3,13 @@
 
 $taskName = "OPCCoachPlanning"
 $scriptPath = "E:\workspaces_2026_python\OPC-CEO\.claude\schedules\opc-coach-planning.bat"
+$workingDir = "E:\workspaces_2026_python\OPC-CEO"
 $description = "Coach self-evolution planning task - Run every 20 minutes"
 
 # Remove existing task if any
 Unregister-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue -Confirm:$false
 
-$action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `'$scriptPath`'"
+$action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `'$scriptPath`'" -WorkingDirectory $workingDir
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 20)
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -DontStopOnIdleEnd -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
