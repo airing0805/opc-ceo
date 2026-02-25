@@ -15,8 +15,21 @@
   },
   "entityId": {
     "task": {
-      "format": "TASK-YYYY-MM-DD-NNN",
-      "example": "TASK-2026-02-23-001"
+      "format": "v{大版本}.{小版本}.{修订版本}",
+      "example": "v2.3.1.1",
+      "note": "直接对应版本规划中的任务组标记"
+    },
+    "coordinationEvent": {
+      "format": "COORD-YYYY-MM-DD-NNN",
+      "example": "COORD-2026-02-24-001"
+    },
+    "conversation": {
+      "format": "CONV-YYYY-MM-DD-NNN",
+      "example": "CONV-2026-02-24-001"
+    },
+    "evolutionDecision": {
+      "format": "EVO-YYYY-MM-DD-NNN",
+      "example": "EVO-2026-02-25-001"
     },
     "project": {
       "format": "PROJ-NNN",
@@ -25,10 +38,6 @@
     "transaction": {
       "format": "TXN-YYYY-MM-DD-NNN",
       "example": "TXN-2026-02-23-001"
-    },
-    "event": {
-      "format": "EVENT-YYYY-MM-DD-NNN",
-      "example": "EVENT-2026-02-24-001"
     }
   },
   "skills": {
