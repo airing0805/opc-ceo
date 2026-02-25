@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 1. **Agent 和 Skill 优先** - 详见 [V2 协作架构](docs/版本规划/v2-技能规划/Team协作架构.md)
 2. **MCP Memory 作为数据层** - 所有数据存储在知识图谱中
 3. **统一入口，角色分工** - CEO 协调，各专业角色各司其职
+4. **无角色时忘状态** - 没有唤醒角色时，忘掉当前项目的状态，不进行任何假设或操作
 
 ## 核心架构
 
