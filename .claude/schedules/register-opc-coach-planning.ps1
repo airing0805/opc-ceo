@@ -12,7 +12,10 @@ $action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c `'$scriptPath
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 20)
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -DontStopOnIdleEnd -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Description $description -Force
+# Use SYSTEM account for background execution (runs without interactive session)
+$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description $description -Force
 
 Write-Host "Task registered: $taskName" -ForegroundColor Green
 Write-Host "Script: $scriptPath" -ForegroundColor Cyan
