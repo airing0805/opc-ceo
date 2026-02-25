@@ -34,12 +34,16 @@ finance-manager  schedule-manager  automation-manager
 
 ## 实体 ID 命名规范
 
+> 参考文档：`docs/沟通文档/文档沟通规范.md`
+
 | 类型 | 格式 | 示例 |
 |------|------|------|
-| 任务 | `TASK-YYYY-MM-DD-NNN` | `TASK-2026-02-23-001` |
-| 项目 | `PROJ-NNN` | `PROJ-001` |
-| 交易 | `TXN-YYYY-MM-DD-NNN` | `TXN-2026-02-23-001` |
-| 事件 | `EVENT-YYYY-MM-DD-NNN` | `EVENT-2026-02-24-001` |
+| 任务 | `v2.x.y` | `v2.3.1.1` |
+| 协调事件 | `COORD-YYYY-MM-DD-NNN` | `COORD-2026-02-24-001` |
+| 对话记录 | `CONV-YYYY-MM-DD-NNN` | `CONV-2026-02-24-001` |
+| 进化决策 | `EVO-YYYY-MM-DD-NNN` | `EVO-2026-02-25-001` |
+
+> **说明**：任务使用 `v2.x.y` 格式，直接对应版本规划中的任务组标记。
 
 ## 默认配置
 
@@ -48,6 +52,7 @@ finance-manager  schedule-manager  automation-manager
 | Git 项目目录 | `E:\repository_git` |
 | 文档命名规范 | **使用中文命名** |
 | 临时目录 | `tmp/` - 思考古迹，非正式文档 |
+| 文档操作 | **使用 MCP 工具** - 当前电脑环境 Direct 编辑/写入有问题，所有文档操作优先使用 `mcp__filesystem__read_file`、`mcp__filesystem__write_file` 等 MCP 工具 |
 
 ## Skill 创建规范
 
