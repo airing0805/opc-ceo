@@ -14,6 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 4. **无角色时忘状态** - 没有唤醒角色时，忘掉当前项目的状态，不进行任何假设或操作
 5. **Coach 制定规范，CEO 执行** - **所有规范由 coach 制定，CEO 负责执行规划内容**
 6. **主动思考，被动执行** - 与用户会话时要深度思考，但执行必须等待确认
+7. **低验证门槛优先** - 优先从公开可采集、低验证门槛平台开始，避免阻塞
 
    **核心区分**：
 
@@ -51,6 +52,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - ✅ "执行它"
    - ✅ "按照这个方案执行"
    - ✅ "确认执行"
+   - ✅ "立即执行"
+
+## 平台策略（战略调整 2026-02-26）
+
+### 优先级调整
+
+| 优先级 | 平台 | 原因 |
+|--------|------|------|
+| **🟢 P0** | 知乎、简书、CSDN、掘金 | 公开可采集，登录1次后稳定 |
+| 🟡 P1 | B站、头条号 | 部分需验证，自动化程度中 |
+| 🔴 P2 | 公众号、抖音、小红书 | 频繁验证，延后处理 |
+
+### 策略原则
+
+1. **低验证门槛优先** - 从不需要频繁验证的平台开始
+2. **用户登录一次** - 后续无需额外验证操作
+3. **CEO 自主执行** - 减少用户参与成本
+4. **媒体素材自主准备** - AI 生成 + 互联网查找
+
+详细规划见：[低验证门槛平台发布计划](docs/运营规划/低验证门槛平台发布计划.md)
 
 ## 核心架构
 
@@ -72,6 +93,9 @@ finance-manager  schedule-manager  automation-manager
                             │
                             ▼
                 claude-sdk-executor (程序化执行)
+                            │
+                            ▼
+                  media-designer (素材设计师) - 新增
 ```
 
 > **核心原则**：Coach（ceo-coach）负责制定所有规范和规划，CEO（opc-ceo-core）负责执行规划内容并协调各角色完成任务。
@@ -166,6 +190,7 @@ finance-manager  schedule-manager  automation-manager
 使用原生 Team/SendMessage API 实现：
 - ✅ `ceo-coach` - CEO 教练
 - ✅ `claude-sdk-executor` - SDK 执行器
+- 📋 `media-designer` - 素材设计师（规划中）
 - 📋 后续：基于 V2 协作架构实现各专业角色
 
 ## 关键文档
@@ -182,6 +207,8 @@ finance-manager  schedule-manager  automation-manager
 | [公司愿景.md](docs/战略规划/公司愿景.md) | 长期愿景和使命 |
 | [战略目标.md](docs/战略规划/战略目标.md) | 年度/季度战略目标 |
 | [内容生产规范.md](docs/内容生产规范.md) | 内容生产流程与角色分工 |
+| [低验证门槛平台发布计划.md](docs/运营规划/低验证门槛平台发布计划.md) | 低验证门槛平台策略 |
+| [媒体素材准备流程.md](docs/运营规划/媒体素材准备流程.md) | 媒体素材准备流程 |
 
 ### 历史归档（V1）
 
@@ -195,5 +222,3 @@ finance-manager  schedule-manager  automation-manager
 | [任务清单.md](docs/版本规划/v1-技能规划/任务清单.md) | V1 实现任务清单 |
 | [系统架构.md](docs/版本规划/v1-技能规划/系统架构.md) | V1 系统架构设计 |
 | [多轮对话-技术设计.md](docs/版本规划/v1-技能规划/多轮对话-技术设计.md) | 多轮对话技术方案 |
-
-
