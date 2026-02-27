@@ -1,0 +1,71 @@
+# 发布配置
+# 注意：敏感信息请通过环境变量设置，详见下文
+
+# 平台配置
+platforms:
+  # 知乎
+  zhihu:
+    enabled: true
+    cookies:
+      # 环境变量: ZHIHU_COOKIE_Z_C0
+      z_c0: ""
+      # 环境变量: ZHIHU_COOKIE_LG_ID
+      lg_id: ""
+    default_category: "科技"
+    default_tags:
+      - Python
+      - AI
+      - 技术
+
+  # CSDN
+  csdn:
+    enabled: false
+    cookies:
+      # 环境变量: CSDN_COOKIE
+      Cookie: ""
+    default_category: "Python"
+
+  # 简书
+  jianshu:
+    enabled: false
+    cookies:
+      # 环境变量: JIANSHU_SESSION
+      note_session: ""
+    default_category: "编程"
+
+  # 掘金
+  juejin:
+    enabled: false
+    cookies:
+      # 环境变量: JUEJIN_COOKIE
+      __guest: ""
+    default_category: "后端"
+
+# 发布设置
+publish_settings:
+  # 是否启用发布前AI检测
+  enable_ai_detection: true
+  # AI味检测阈值（超过此值不允许发布）
+  ai_threshold: 60
+  # 是否自动添加水印
+  add_watermark: false
+  # 发布间隔（秒）
+  publish_interval: 300
+  # 重试次数
+  max_retries: 3
+  # 超时时间（秒）
+  timeout: 30
+
+# 代理设置
+proxy:
+  enabled: false
+  http: ""
+  https: ""
+
+# 日志设置
+logging:
+  level: "INFO"
+  # 是否输出到文件
+  file_enabled: true
+  # 日志文件路径
+  file_path: "logs/publisher.log"
