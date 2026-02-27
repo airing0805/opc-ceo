@@ -3,13 +3,49 @@
     "PreToolUse": [
       {
         "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{const i=JSON.parse(d);const p=i.tool_input?.file_path||'';const block=(p.endsWith('.md')||p.endsWith('.txt'))&&!/(README|CLAUDE|AGENTS|CONTRIBUTING)\\.md$/.test(p)&&!/\\.claude\\/plans\\//.test(p)&&!/[\u4e00-\u9fa5]/.test(p);if(block){console.error('[Hook] BLOCKED: Unnecessary documentation file creation');console.error('[Hook] File: '+p);console.error('[Hook] Use README.md for documentation instead');process.exit(2)}}catch{}console.log(d)})\""
-          }
-        ],
-        "description": "Block English .md files, but allow Chinese-named docs (per coding-style.md)"
+        "hooks": []
+      },
+      {
+        "matcher": "Edit",
+        "hooks": []
+      },
+      {
+        "matcher": "Bash",
+        "hooks": []
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": []
+      },
+      {
+        "matcher": "Edit",
+        "hooks": []
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": []
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": []
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": []
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": []
       }
     ]
   }
